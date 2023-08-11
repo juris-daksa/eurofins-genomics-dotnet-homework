@@ -38,6 +38,7 @@ public class OrderService : IOrderService
 
         var discountCoeff = GetDiscount(newOrder.OrderedUnits.Sum(item => item.Quantity));
         newOrder.PriceTotal = CalculatePriceTotal(newOrder.PriceSubTotal, discountCoeff);
+        _orderRepository.Save(newOrder);
 
         return newOrder;
     }

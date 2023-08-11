@@ -2,5 +2,5 @@
 
 public interface IOrderRepository
 {
-    void Save(IOrderDraft order);
+    void Save(IOrder order);
 }
