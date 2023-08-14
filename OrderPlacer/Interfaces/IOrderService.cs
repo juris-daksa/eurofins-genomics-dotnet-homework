@@ -6,5 +6,5 @@ namespace OrderPlacer.Interfaces;
 public interface IOrderService
 {
     Task<IOrder> PlaceOrderAsync(IOrderDraft orderDraft);
-    Task<List<IOrder>> GetOrdersByCustomerIdAsync(string CustomerId);
+    Task<IEnumerable<IOrder>> GetOrdersByCustomerIdAsync(string CustomerId);
 }
