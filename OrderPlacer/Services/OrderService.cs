@@ -52,9 +52,16 @@ public class OrderService : IOrderService
         return newOrder;
     }
 
-    public async Task<List<IOrder>> GetOrdersByCustomerIdAsync(string CustomerId)
+    public async Task<IEnumerable<IOrder>> GetOrdersByCustomerIdAsync(string CustomerId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return await _orderRepository.GetOrdersByCustomerIdAsync(CustomerId);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
     }
 
     private string? ValidateOrder(IOrderDraft orderDraft)

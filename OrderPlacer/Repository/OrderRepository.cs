@@ -20,8 +20,8 @@ public class OrderRepository : IOrderRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task<IEnumerable<IOrder>> GetOrdersByCustomerIdAsync(string customerId)
+    public async Task<IEnumerable<IOrder>> GetOrdersByCustomerIdAsync(string customerId)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Order>().Where(order => order.CustomerId.Equals(customerId)).ToListAsync();
     }
 }
