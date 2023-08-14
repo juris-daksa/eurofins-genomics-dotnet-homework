@@ -1,6 +1,7 @@
 using OrderPlacer.Entities;
 using OrderPlacer.Exceptions;
 using OrderPlacer.Interfaces;
+using OrderPlacer.Repository;
 using System.Diagnostics.CodeAnalysis;
 
 namespace OrderPlacer.Services;
@@ -14,7 +15,7 @@ public class OrderService : IOrderService
         _orderRepository = orderRepository;
     }
 
-    public async Task<Order> PlaceOrderAsync (IOrderDraft orderDraft)
+    public async Task<IOrder> PlaceOrderAsync (IOrderDraft orderDraft)
     {
         if (orderDraft == null)
         {
@@ -38,12 +39,20 @@ public class OrderService : IOrderService
 
         var discountCoeff = GetDiscount(newOrder.OrderedUnits.Sum(item => item.Quantity));
         newOrder.PriceTotal = CalculatePriceTotal(newOrder.PriceSubTotal, discountCoeff);
-        _orderRepository.Save(newOrder);
+
+        try
+        {
+            await _orderRepository.AddAsync(newOrder);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
 
         return newOrder;
     }
 
-    public async Task<List<Order>> GetOrdersByCustomerIdAsync(string CustomerId)
+    public async Task<List<IOrder>> GetOrdersByCustomerIdAsync(string CustomerId)
     {
         throw new NotImplementedException();
     }
@@ -73,7 +82,7 @@ public class OrderService : IOrderService
         return null;
     }
 
-    private decimal CalculatePriceSubTotal(IEnumerable<OrderedUnit> orderedUnits)
+    private decimal CalculatePriceSubTotal(List<IOrderUnit> orderedUnits)
     {
         return orderedUnits.Sum(item => item.Quantity * item.Product.BasePrice);
     }
@@ -94,6 +103,8 @@ public class OrderService : IOrderService
         {
             return 0.95m;
         }
+
+        return 1.00m;
     }
 
 }

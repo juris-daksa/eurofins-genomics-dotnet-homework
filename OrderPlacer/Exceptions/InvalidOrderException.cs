@@ -1,4 +1,4 @@
-﻿namespace OrderPlacer.Exceptions
+﻿namespace OrderPlacer.Exceptions;
 
 public class InvalidOrderException : Exception
 {

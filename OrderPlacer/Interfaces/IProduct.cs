@@ -1,4 +1,4 @@
-﻿namespace OrderPlacer.Interfaces
+﻿namespace OrderPlacer.Interfaces;
 
 public interface IProduct
 {

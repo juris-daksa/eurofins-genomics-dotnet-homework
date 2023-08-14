@@ -1,6 +1,6 @@
-﻿namespace OrderPlacer.Interfaces
+﻿namespace OrderPlacer.Interfaces;
 
-public interface IOrder
+public interface IOrder : IEntity
 {
     List<IOrderUnit> OrderedUnits { get; set; }
     string CustomerId { get; set; }

@@ -1,6 +1,5 @@
 ﻿using OrderPlacer.Entities;
 using OrderPlacer.Interfaces;
-using System.Net;
 
 namespace OrderPlacer.Interfaces;
 

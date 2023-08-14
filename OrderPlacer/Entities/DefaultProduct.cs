@@ -1,6 +1,6 @@
 ﻿using OrderPlacer.Interfaces;
 
-namespace OrderPlacer.Entities
+namespace OrderPlacer.Entities;
 
 public class DefaultProduct : IProduct
 {
